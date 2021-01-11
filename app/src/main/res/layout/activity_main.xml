@@ -45,7 +45,7 @@
             android:layout_marginTop="60dp"
             android:background="@drawable/rectangle_et"
             android:ems="10"
-            android:hint="username"
+            android:hint="Email"
             android:inputType="textPersonName"
             android:padding="10dp"
             android:textColor="@color/white"
@@ -89,11 +89,11 @@
             android:text="Sign-up"
             android:textColor="@color/txt_gray"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintEnd_toStartOf="@+id/img_sign_up"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/img_sign_up"
             android:layout_width="25dp"
             android:layout_height="27dp"
             android:layout_marginTop="16dp"

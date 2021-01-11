@@ -12,6 +12,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         EditText Username,Password;
         Button btn_login;
+        TextView sign_up;
+        ImageView img_sign;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -41,10 +45,29 @@ public class MainActivity extends AppCompatActivity {
         Username=findViewById(R.id.et_username);
         Password=findViewById(R.id.et_password);
         btn_login=findViewById(R.id.btn_login);
+        sign_up=findViewById(R.id.tv_signup);
+        img_sign=findViewById(R.id.img_sign_up);
+
+        img_sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent (MainActivity.this,SignUp.class);
+                startActivity(intent);
+            }
+        });
+
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent (MainActivity.this,SignUp.class);
+                startActivity(intent);
+            }
+        });
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = Username.getText().toString();
+                String email = Username.getText().toString();
                 String password = Password.getText().toString();
 //                Toast.makeText(MainActivity.this, username, Toast.LENGTH_SHORT).show();
 
@@ -52,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
                 FormBody body = new FormBody.Builder()
                         .add("tag", "login")
-                        .add("username", username)
+                        .add("email", email)
                         .add("password", password)
                         .build();
 
                 Request request = new Request.Builder()
-                        .url("https://webclinicapp.000webhostapp.com/webservice.php")
+                        .url("https://webclinicapp.000webhostapp.com/ofw_webservice.php")
                         .post(body)
                         .build();
                 client.newCall(request).enqueue(new Callback() {
@@ -73,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
                             MainActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if(myResponse.equals("No user found.")) {
+                                    Toast.makeText(MainActivity.this, myResponse, Toast.LENGTH_SHORT).show();
+                                    if(myResponse.equals("pasok")) {
                                         loginmessage1();
                                     }else if(myResponse.equals("Wrong Password. Please Try again")) {
                                         loginmessage3();
